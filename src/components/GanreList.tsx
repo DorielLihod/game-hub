@@ -1,12 +1,11 @@
-import React from "react";
 import useGanres from "../hooks/useGanres";
 
 const GanreList = () => {
-  const { ganres } = useGanres();
+  const { data } = useGanres();
 
   return (
     <ul>
-      {ganres.map((ganre) => (
+      {data.map((ganre) => (
         <li>{ganre.name}</li>
       ))}
     </ul>
