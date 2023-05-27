@@ -12,9 +12,13 @@ import GameGrid from "./components/GameGrid";
 import { useState } from "react";
 import { Ganre } from "./hooks/useGanres";
 import PlatformSelector from "./components/PlatformSelector";
+import { Platform } from "./hooks/useGames";
 
 function App() {
   const [selectedGanre, setSelectedGanre] = useState<Ganre | null>(null);
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
+    null
+  );
 
   return (
     <Grid
@@ -42,9 +46,15 @@ function App() {
 
       <GridItem area="main">
         <HStack justifyContent="center">
-          <PlatformSelector />
+          <PlatformSelector
+            onSelectPlatform={(platform) => setSelectedPlatform(platform)}
+            selectedPlatform={selectedPlatform}
+          />
         </HStack>
-        <GameGrid selectedGanre={selectedGanre} />
+        <GameGrid
+          selectedGanre={selectedGanre}
+          selectedPlatform={selectedPlatform}
+        />
       </GridItem>
     </Grid>
   );
