@@ -12,8 +12,9 @@ import getCroppedImageUrl from "../services/image-url";
 
 interface Props {
   onSelectGanre: (ganre: Ganre) => void;
+  selectedGanre: Ganre | null;
 }
-const GanreList = ({ onSelectGanre }: Props) => {
+const GanreList = ({ onSelectGanre, selectedGanre }: Props) => {
   const { data, isLoading, error } = useGanres();
 
   if (isLoading) return <Spinner />;
@@ -34,6 +35,7 @@ const GanreList = ({ onSelectGanre }: Props) => {
               onClick={() => onSelectGanre(ganre)}
               fontSize="lg"
               variant="link"
+              fontWeight={ganre.id === selectedGanre?.id ? "bold" : "normal"}
             >
               {ganre.name}
             </Button>
