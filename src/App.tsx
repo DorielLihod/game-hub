@@ -1,9 +1,17 @@
-import { Button, ButtonGroup, Grid, GridItem, Show } from "@chakra-ui/react";
+import {
+  Button,
+  ButtonGroup,
+  Grid,
+  GridItem,
+  HStack,
+  Show,
+} from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GanreList from "./components/GanreList";
 import GameGrid from "./components/GameGrid";
 import { useState } from "react";
 import { Ganre } from "./hooks/useGanres";
+import PlatformSelector from "./components/PlatformSelector";
 
 function App() {
   const [selectedGanre, setSelectedGanre] = useState<Ganre | null>(null);
@@ -33,6 +41,9 @@ function App() {
       </Show>
 
       <GridItem area="main">
+        <HStack justifyContent="center">
+          <PlatformSelector />
+        </HStack>
         <GameGrid selectedGanre={selectedGanre} />
       </GridItem>
     </Grid>
