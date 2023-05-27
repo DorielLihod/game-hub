@@ -1,8 +1,19 @@
-import { HStack, Image, List, ListItem, Spinner, Text } from "@chakra-ui/react";
-import useGanres from "../hooks/useGanres";
+import {
+  Button,
+  HStack,
+  Image,
+  List,
+  ListItem,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
+import useGanres, { Ganre } from "../hooks/useGanres";
 import getCroppedImageUrl from "../services/image-url";
 
-const GanreList = () => {
+interface Props {
+  onSelectGanre: (ganre: Ganre) => void;
+}
+const GanreList = ({ onSelectGanre }: Props) => {
   const { data, isLoading, error } = useGanres();
 
   if (isLoading) return <Spinner />;
@@ -19,7 +30,13 @@ const GanreList = () => {
               borderRadius={8}
               src={getCroppedImageUrl(ganre.image_background)}
             />
-            <Text fontSize="lg">{ganre.name}</Text>
+            <Button
+              onClick={() => onSelectGanre(ganre)}
+              fontSize="lg"
+              variant="link"
+            >
+              {ganre.name}
+            </Button>
           </HStack>
         </ListItem>
       ))}
