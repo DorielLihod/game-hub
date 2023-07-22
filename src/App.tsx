@@ -14,11 +14,13 @@ import { Ganre } from "./hooks/useGanres";
 import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/useGames";
 
+export interface GameQuery {
+  ganre: Ganre | null;
+  platform: Platform | null;
+}
+
 function App() {
-  const [selectedGanre, setSelectedGanre] = useState<Ganre | null>(null);
-  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
-    null
-  );
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
   return (
     <Grid
@@ -38,8 +40,8 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <GanreList
-            selectedGanre={selectedGanre}
-            onSelectGanre={(ganre) => setSelectedGanre(ganre)}
+            selectedGanre={gameQuery.ganre}
+            onSelectGanre={(ganre) => setGameQuery({ ...gameQuery, ganre })}
           />
         </GridItem>
       </Show>
@@ -47,14 +49,13 @@ function App() {
       <GridItem area="main">
         <HStack justifyContent="center">
           <PlatformSelector
-            onSelectPlatform={(platform) => setSelectedPlatform(platform)}
-            selectedPlatform={selectedPlatform}
+            onSelectPlatform={(platform) =>
+              setGameQuery({ ...gameQuery, platform })
+            }
+            selectedPlatform={gameQuery.platform}
           />
         </HStack>
-        <GameGrid
-          selectedGanre={selectedGanre}
-          selectedPlatform={selectedPlatform}
-        />
+        <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>
   );
