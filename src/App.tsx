@@ -13,6 +13,7 @@ import { useState } from "react";
 import { Ganre } from "./hooks/useGanres";
 import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/useGames";
+import SortSelector from "./components/SortSelector";
 
 export interface GameQuery {
   ganre: Ganre | null;
@@ -47,13 +48,14 @@ function App() {
       </Show>
 
       <GridItem area="main">
-        <HStack justifyContent="center">
+        <HStack spacing={5} paddingLeft={10} marginBottom={5}>
           <PlatformSelector
             onSelectPlatform={(platform) =>
               setGameQuery({ ...gameQuery, platform })
             }
             selectedPlatform={gameQuery.platform}
           />
+          <SortSelector />
         </HStack>
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
